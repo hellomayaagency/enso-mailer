@@ -54,7 +54,6 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": false,
             "phpstan/extension-installer": true
         }
     },
