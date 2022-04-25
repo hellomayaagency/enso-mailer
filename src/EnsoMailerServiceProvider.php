@@ -2,9 +2,9 @@
 
 namespace Hellomayaagency\EnsoMailer;
 
+use Hellomayaagency\EnsoMailer\Commands\EnsoMailerCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Hellomayaagency\EnsoMailer\Commands\EnsoMailerCommand;
 
 class EnsoMailerServiceProvider extends PackageServiceProvider
 {
