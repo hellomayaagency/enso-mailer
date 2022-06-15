@@ -6,20 +6,18 @@ use App;
 use Carbon\Carbon;
 use EnsoMailer;
 use Exception;
-use Hellomayaagency\Enso\Mailer\Contracts\Audience;
 use Hellomayaagency\Enso\Mailer\Contracts\Campaign as CampaignContract;
-use Hellomayaagency\Enso\Mailer\Contracts\CampaignCrud;
 use Hellomayaagency\Enso\Mailer\Contracts\MailSender;
 use Hellomayaagency\Enso\Mailer\Exceptions\CampaignStateException;
 use Hellomayaagency\Enso\Mailer\Jobs\ScheduleCampaignSend;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 use Yadda\Enso\Crud\Contracts\FlexibleFieldHandler;
 use Yadda\Enso\Crud\Contracts\IsCrudModel as ContractsIsCrudModel;
 use Yadda\Enso\Crud\Traits\HasFlexibleFields;
 use Yadda\Enso\Crud\Traits\IsCrudModel;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
 {
@@ -72,7 +70,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      */
     public function audiences()
     {
-        return $this->belongsToMany(App::make(Audience::class), 'mailer_campaign_audience');
+        return $this->belongsToMany(EnsoCrud::modelClass('mailer_audience'), 'mailer_campaign_audience');
     }
 
     /**
@@ -365,7 +363,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      */
     public function unpackedEmailBody()
     {
-        $row_specs = App::make(Config::get('enso.crud.mailer_campaign.config'))
+        $row_specs = EnsoCrud::config('mailer_campaign')
             ->getEditForm()
             ->getSection('content')
             ->getField('mail_body')
@@ -381,7 +379,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
             )::unpack($flexible_row);
         });
 
-        return App::make(CampaignCrud::class)::getRowSpecContent('mail_body', $this->mail_body);
+        return EnsoCrud::config('mailer_campaign')::getRowSpecContent('mail_body', $this->mail_body);
     }
 
     /**

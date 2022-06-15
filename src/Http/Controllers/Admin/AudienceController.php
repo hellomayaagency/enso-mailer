@@ -7,11 +7,11 @@ use Hellomayaagency\Enso\Mailer\Contracts\AudienceController as AudienceControll
 use Hellomayaagency\Enso\Mailer\Contracts\Condition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Yadda\Enso\Crud\Controller;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class AudienceController extends Controller implements AudienceControllerContract
 {
@@ -26,25 +26,6 @@ class AudienceController extends Controller implements AudienceControllerContrac
     {
         // We don't need any for this controller
     }
-
-    // /**
-    //  * Permforms that actual create functionality using provided data.
-    //  *
-    //  * @param array $data Data to apply
-    //  *
-    //  * @return void
-    //  */
-    // protected function performCreate($data)
-    // {
-    //     $this->getConfig()
-    //         ->getCreateForm()
-    //         ->applyRequestData($data, [$this, 'beforeSaveCallback'])
-    //         ->saveModelInstance()
-    //         ->applyRequestDataAfterSave($data, [$this, 'afterSaveCallback'])
-    //         ->saveModelInstance()
-    //         ->getModelInstance()
-    //         ->refresh();
-    // }
 
     /**
      * Permforms that actual create functionality using provided data.
@@ -96,7 +77,8 @@ class AudienceController extends Controller implements AudienceControllerContrac
      */
     protected function createConditionFromData($condition_data, $parent_audience)
     {
-        $condition = App::make(Condition::class);
+        $condition_class = EnsoCrud::modelClass('mailer_condition');
+        $condition = new $condition_class;
         $condition->audience()->associate($parent_audience);
 
         $condition->type = $condition_data['type'];

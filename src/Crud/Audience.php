@@ -2,17 +2,16 @@
 
 namespace Hellomayaagency\Enso\Mailer\Crud;
 
-use Hellomayaagency\Enso\Mailer\Contracts\Audience as AudienceContract;
-use Illuminate\Support\Facades\App;
 use Yadda\Enso\Crud\Config;
 use Yadda\Enso\Crud\Forms\Form;
 use Yadda\Enso\Crud\Tables\Text;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class Audience extends Config
 {
     public function configure()
     {
-        $this->setModel(get_class(App::make(AudienceContract::class)))
+        $this->setModel(EnsoCrud::modelClass('mailer_audience'))
             ->setRoute('admin.mailer.audiences')
             ->setViewsDir('mailer_audiences')
             ->setNameSingular('Audience')

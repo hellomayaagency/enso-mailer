@@ -2,12 +2,10 @@
 
 namespace Hellomayaagency\Enso\Mailer\Http\Controllers\Admin;
 
-use Hellomayaagency\Enso\Mailer\Contracts\Campaign;
 use Hellomayaagency\Enso\Mailer\Contracts\CampaignController as CampaignControllerContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 use Yadda\Enso\Crud\Controller;
-use Yadda\Enso\Users\Contracts\UserCrud;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class CampaignController extends Controller implements CampaignControllerContract
 {
@@ -22,11 +20,11 @@ class CampaignController extends Controller implements CampaignControllerContrac
      */
     public function show($campaign_id)
     {
-        $campaign = App::make(Campaign::class)::findOrFail($campaign_id);
+        $campaign = EnsoCrud::modelClass('mailer_campaign')::findOrFail($campaign_id);
 
         $crud = $this->getConfig();
 
-        $user_config = App::make(UserCrud::class);
+        $user_config = EnsoCrud::config('user');
 
         $columns = $user_config->getJsConfig()['columns'];
 

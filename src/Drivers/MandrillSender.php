@@ -12,6 +12,7 @@ use Hellomayaagency\Enso\Mailer\Models\MailEvent;
 use Hellomayaagency\Enso\Mailer\Models\MailRecipient;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class MandrillSender implements MailSender
 {
@@ -121,10 +122,10 @@ class MandrillSender implements MailSender
     protected function generateCampaignEmail()
     {
         $from_email = empty($this->campaign->from_email) ?
-            App::make(Config::get('enso.crud.mailer_campaign.model'))::getSenderEmailFallback() : $this->campaign->from_email;
+            EnsoCrud::modelClass('mailer_campaign')::getSenderEmailFallback() : $this->campaign->from_email;
 
         $from_name = empty($this->campaign->from_name) ?
-            App::make(Config::get('enso.crud.mailer_campaign.model'))::getSenderNameFallback() : $this->campaign->from_name;
+            EnsoCrud::modelClass('mailer_campaign')::getSenderNameFallback() : $this->campaign->from_name;
 
         $this->message_body = [
             'html' => $this->campaign->getRenderedEmail(),

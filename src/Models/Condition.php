@@ -3,12 +3,11 @@
 namespace Hellomayaagency\Enso\Mailer\Models;
 
 use EnsoMailer;
-use Hellomayaagency\Enso\Mailer\Contracts\Audience;
 use Hellomayaagency\Enso\Mailer\Contracts\Condition as ConditionContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 use Yadda\Enso\Crud\Contracts\IsCrudModel as ContractsIsCrudModel;
 use Yadda\Enso\Crud\Traits\IsCrudModel;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class Condition extends Model implements ConditionContract, ContractsIsCrudModel
 {
@@ -36,7 +35,7 @@ class Condition extends Model implements ConditionContract, ContractsIsCrudModel
      */
     public function audience()
     {
-        return $this->belongsTo(App::make(Audience::class));
+        return $this->belongsTo(EnsoCrud::modelClass('mailer_audience'));
     }
 
     /**
@@ -47,7 +46,7 @@ class Condition extends Model implements ConditionContract, ContractsIsCrudModel
      */
     public function parent()
     {
-        return $this->belongsTo(App::make(ConditionContract::class), 'parent_id');
+        return $this->belongsTo(EnsoCrud::modelClass('mailer_condition'), 'parent_id');
     }
 
     /**

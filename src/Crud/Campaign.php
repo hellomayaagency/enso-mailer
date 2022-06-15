@@ -2,14 +2,11 @@
 
 namespace Hellomayaagency\Enso\Mailer\Crud;
 
-use Hellomayaagency\Enso\Mailer\Contracts\Audience;
-use Hellomayaagency\Enso\Mailer\Contracts\Campaign as CampaignContract;
 use Hellomayaagency\Enso\Mailer\Crud\Forms\Sections\CTASection;
 use Hellomayaagency\Enso\Mailer\Crud\Forms\Sections\DividerSection;
 use Hellomayaagency\Enso\Mailer\Crud\Forms\Sections\ImageSection;
 use Hellomayaagency\Enso\Mailer\Crud\Forms\Sections\TextSection;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 use Yadda\Enso\Crud\Config;
 use Yadda\Enso\Crud\Forms\Fields\BelongsToManyField;
 use Yadda\Enso\Crud\Forms\Fields\DateField;
@@ -20,6 +17,7 @@ use Yadda\Enso\Crud\Forms\Fields\TextField;
 use Yadda\Enso\Crud\Forms\Form;
 use Yadda\Enso\Crud\Forms\Section;
 use Yadda\Enso\Crud\Tables\Text;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class Campaign extends Config
 {
@@ -40,7 +38,7 @@ class Campaign extends Config
 
     public function configure()
     {
-        $this->setModel(get_class(App::make(CampaignContract::class)))
+        $this->setModel(EnsoCrud::modelClass('mailer_campaign'))
             ->setRoute('admin.mailer.campaigns')
             ->setViewsDir('mailer_campaigns')
             ->setNameSingular('Campaign')
@@ -155,10 +153,10 @@ class Campaign extends Config
      */
     public function create(Form $form)
     {
-        $audience_class = get_class(App::make(Audience::class));
+        $audience_class = EnsoCrud::modelClass('mailer_audience');
 
-        $from_name = App::make(CampaignContract::class)::getSenderNameFallback() ?? '';
-        $from_email = App::make(CampaignContract::class)::getSenderEmailFallback() ?? '';
+        $from_name = EnsoCrud::modelClass('mailer_campaign')::getSenderNameFallback() ?? '';
+        $from_email = EnsoCrud::modelClass('mailer_campaign')::getSenderEmailFallback() ?? '';
 
         $form->addSections([
             1 => (new Section('main'))

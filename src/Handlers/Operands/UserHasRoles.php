@@ -2,8 +2,7 @@
 
 namespace Hellomayaagency\Enso\Mailer\Handlers\Operands;
 
-use Illuminate\Support\Facades\App;
-use Yadda\Enso\Users\Contracts\Role as RoleContract;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class UserHasRoles extends BaseOperand
 {
@@ -55,7 +54,7 @@ class UserHasRoles extends BaseOperand
 
     protected function getOptions()
     {
-        $role_instance = App::make(RoleContract::class);
+        $role_instance = EnsoCrud::modelClass('role');
 
         return [
             'settings' => [

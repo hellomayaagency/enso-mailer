@@ -2,12 +2,11 @@
 
 namespace Hellomayaagency\Enso\Mailer\Models;
 
-use Hellomayaagency\Enso\Mailer\Contracts\Campaign;
 use Hellomayaagency\Enso\Mailer\Exceptions\CampaignStatsException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 use Yadda\Enso\Crud\Contracts\IsCrudModel as ContractsIsCrudModel;
 use Yadda\Enso\Crud\Traits\IsCrudModel;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class CampaignStats extends Model implements ContractsIsCrudModel
 {
@@ -79,7 +78,7 @@ class CampaignStats extends Model implements ContractsIsCrudModel
      */
     public function campaign()
     {
-        return $this->belongsTo(App::make(Campaign::class));
+        return $this->belongsTo(EnsoCrud::modelClass('mailer_campaign'));
     }
 
     /**

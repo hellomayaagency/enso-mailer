@@ -2,18 +2,17 @@
 
 namespace Hellomayaagency\Enso\Mailer\Http\Controllers\Admin\Json;
 
-use Hellomayaagency\Enso\Mailer\Contracts\Campaign;
 use Hellomayaagency\Enso\Mailer\Contracts\JsonCampaignUserController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Response;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class CampaignUserController implements JsonCampaignUserController
 {
     public function index(Request $request, $campaign_id)
     {
-        $campaign = App::make(Campaign::class)::findOrFail($campaign_id);
+        $campaign = EnsoCrud::modelClass('mailer_campaign')::findOrFail($campaign_id);
 
         $args = [
             'orderby' => $request->input('orderby', 'order'),

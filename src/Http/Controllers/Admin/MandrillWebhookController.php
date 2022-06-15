@@ -4,14 +4,13 @@ namespace Hellomayaagency\Enso\Mailer\Http\Controllers\Admin;
 
 use EnsoMailer;
 use Exception;
-use Hellomayaagency\Enso\Mailer\Contracts\Campaign;
 use Hellomayaagency\Enso\Mailer\Contracts\MandrillWebhookController as MandrillWebhookControllerContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Log;
 use Response;
+use Yadda\Enso\Facades\EnsoCrud;
 
 class MandrillWebhookController implements MandrillWebhookControllerContract
 {
@@ -159,7 +158,7 @@ class MandrillWebhookController implements MandrillWebhookControllerContract
             return;
         }
 
-        $campaigns = (App::make(Campaign::class))::find($campaign_ids);
+        $campaigns = EnsoCrud::query('mailer_campaign')->find($campaign_ids);
 
         $campaigns->each(function ($campaign) {
             $campaign->recalculateStats();
