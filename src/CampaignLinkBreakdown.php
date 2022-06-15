@@ -28,7 +28,7 @@ class CampaignLinkBreakdown
 
     protected function parseMessages()
     {
-        $links = new Collection;
+        $links = new Collection();
 
         $this->getMessageQuery()->chunk(100, function ($recipients) use ($links) {
             $recipients->each(function ($recipient) use ($links) {
@@ -63,7 +63,7 @@ class CampaignLinkBreakdown
                 continue;
             }
 
-            if (!$links->has($click['url'])) {
+            if (! $links->has($click['url'])) {
                 $links->put($click['url'], (object) [
                     'total' => 0,
                     'unique' => 0,
@@ -72,7 +72,7 @@ class CampaignLinkBreakdown
 
             $links->get($click['url'])->total += 1;
 
-            if (!in_array($click['url'], $unique_urls)) {
+            if (! in_array($click['url'], $unique_urls)) {
                 $unique_urls[] = $click['url'];
                 $links->get($click['url'])->unique += 1;
             }
