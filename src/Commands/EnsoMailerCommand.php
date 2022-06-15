@@ -1,6 +1,6 @@
 <?php
 
-namespace Hellomayaagency\EnsoMailer\Commands;
+namespace Hellomayaagency\Enso\Mailer\Commands;
 
 use Illuminate\Console\Command;
 

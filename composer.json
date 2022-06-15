@@ -23,7 +23,8 @@
     "require": {
         "php": "^7.4",
         "illuminate/contracts": "^8.0",
-        "spatie/laravel-package-tools": "^1.9.2"
+        "spatie/laravel-package-tools": "^1.9.2",
+        "mailchimp/transactional": "^1.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.0",
@@ -37,13 +38,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Hellomayaagency\\EnsoMailer\\": "src",
-            "Hellomayaagency\\EnsoMailer\\Database\\Factories\\": "database/factories"
+            "Hellomayaagency\\Enso\\Mailer\\": "src",
+            "Hellomayaagency\\Enso\\Mailer\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Hellomayaagency\\EnsoMailer\\Tests\\": "tests"
+            "Hellomayaagency\\Enso\\Mailer\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -60,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Hellomayaagency\\EnsoMailer\\EnsoMailerServiceProvider"
+                "Hellomayaagency\\Enso\\Mailer\\EnsoMailerServiceProvider"
             ],
             "aliases": {
-                "EnsoMailer": "Hellomayaagency\\EnsoMailer\\Facades\\EnsoMailer"
+                "EnsoMailer": "Hellomayaagency\\Enso\\Mailer\\Facades\\EnsoMailer"
             }
         }
     },

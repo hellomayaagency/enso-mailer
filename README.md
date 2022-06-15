@@ -8,7 +8,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/hellomayaagency/enso-mailer/Check%20&%20fix%20styling?label=code%20style)](https://github.com/hellomayaagency/enso-mailer/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/hellomayaagency/enso-mailer.svg?style=flat-square)](https://packagist.org/packages/hellomayaagency/enso-mailer)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A Mailer package for Ensō. This will let you build Audiences from your users based on custom queries, then build and send mail to these audiences.
 
 ## Support us
 
@@ -26,17 +26,22 @@ You can install the package via composer:
 composer require hellomayaagency/enso-mailer
 ```
 
-You can publish and run the migrations with:
+You can optionally publish migrations:
 
 ```bash
-php artisan vendor:publish --tag="enso-mailer-migrations"
+php artisan vendor:publish --provider "Hellomayaagency\\Enso\\Mailer\\EnsoMailerServiceProvider" --tag "enso-migrations"
+```
+
+Whether you publish them or not, you can then run them with:
+
+```bash
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="enso-mailer-config"
+php artisan vendor:publish --provider Hellomayaagency\\Enso\\Mailer\\EnsoMailerServiceProvider --tag="enso-mailer-config"
 ```
 
 This is the contents of the published config file:
@@ -64,6 +69,12 @@ echo $ensoMailer->echoPhrase('Hello, Hellomayaagency!');
 ```bash
 composer test
 ```
+### Ngrok
+
+You need to:
+
+1. Run ngrok via for a homestead build: `ngrok http 192.168.10.10:80 -host-header=site.test`
+1. Fill the environment variable `ENSO_MAILER_MANDRILL_URL` with the ngrok url gives you.
 
 ## Changelog
 

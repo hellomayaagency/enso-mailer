@@ -1,6 +1,6 @@
 <?php
 
-namespace Hellomayaagency\EnsoMailer\Facades;
+namespace Hellomayaagency\Enso\Mailer\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
