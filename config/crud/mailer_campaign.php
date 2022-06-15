@@ -13,6 +13,11 @@ return [
     'controller' => Hellomayaagency\Enso\Mailer\Http\Controllers\Admin\CampaignController::class,
 
     /**
+     * Whether to allow cloning via the CMS index page
+     */
+    'enable_cloning' => true,
+
+    /**
      * Properties for the Ensō menu item for Mailer Campaigns.
      */
     'menuitem' => [
