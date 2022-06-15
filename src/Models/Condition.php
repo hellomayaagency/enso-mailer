@@ -138,6 +138,7 @@ class Condition extends Model implements ConditionContract, ContractsIsCrudModel
     {
         $relationship_name = $this->getOperandObject()->getRelationshipName();
         $relationship_name_parts = explode('.', $relationship_name);
+
         return array_pop($relationship_name_parts);
     }
 
@@ -183,7 +184,7 @@ class Condition extends Model implements ConditionContract, ContractsIsCrudModel
         return [
             'operand' => $this->getOperand(),
             'operator' => $this->getOperator(),
-            'data' =>  $this->getData(),
+            'data' => $this->getData(),
         ];
     }
 }

@@ -5,7 +5,6 @@ namespace Hellomayaagency\Enso\Mailer\Handlers;
 use Exception;
 use Illuminate\Support\Collection;
 use Log;
-use Hellomayaagency\Enso\Mailer\Handlers\ConditionTreeNode;
 
 class ConditionTree
 {
@@ -74,7 +73,7 @@ class ConditionTree
      */
     protected function applyGroupCondition($query, $group_condition, $apply_as = 'AND')
     {
-        if (!$this->isValidGroupCondition($group_condition)) {
+        if (! $this->isValidGroupCondition($group_condition)) {
             return $query;
         }
 
@@ -130,7 +129,7 @@ class ConditionTree
      */
     protected function isValidGroupCondition($group_condition)
     {
-        if (!$group_condition->isConditionGroup()) {
+        if (! $group_condition->isConditionGroup()) {
             throw new Exception('Attempting to apply QueryCondition as a Group');
         }
 
@@ -139,9 +138,10 @@ class ConditionTree
          * removed from the tree while saving / updating. This being the case, Log an
          * error and delete the condition-group, then return to continue on.
          */
-        if (($group_condition['conditions'] ?? new Collection)->count() === 0) {
+        if (($group_condition['conditions'] ?? new Collection())->count() === 0) {
             Log::warning('MAILER: Condition group with no conditions found. Deleting');
             $group_condition->delete();
+
             return false;
         }
 
@@ -229,7 +229,7 @@ class ConditionTree
             return $condition->parent_id === $parent->getKey();
         });
 
-        $parent->conditions = $direct_children ?? new Collection;
+        $parent->conditions = $direct_children ?? new Collection();
 
         $parent->conditions->each(function ($child_node) use ($not_direct_children) {
             if ($not_direct_children->contains(function ($possible_child) use ($child_node) {
@@ -251,8 +251,8 @@ class ConditionTree
      */
     protected function childrenToArray($node)
     {
-        if (!$node->conditions) {
-            $node->conditions = new Collection;
+        if (! $node->conditions) {
+            $node->conditions = new Collection();
         }
 
         $node->conditions = $node->conditions->transform(function ($child_node) {

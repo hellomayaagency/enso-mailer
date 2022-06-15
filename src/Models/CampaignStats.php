@@ -130,7 +130,7 @@ class CampaignStats extends Model implements ContractsIsCrudModel
     {
         $value = $this->{$property};
 
-        if (!is_null($value)) {
+        if (! is_null($value)) {
         }
 
         return $value;
@@ -148,7 +148,7 @@ class CampaignStats extends Model implements ContractsIsCrudModel
     {
         $value = $this->{$property};
 
-        if (!is_null($value)
+        if (! is_null($value)
             && data_get(self::$potential_properties, $property . '.percent_of_send', false)) {
             $percent = number_format(($this->{$property} / $this->send) * 100, 0);
             $value = (string)$value . ' (' . $percent . '%)';
@@ -196,7 +196,7 @@ class CampaignStats extends Model implements ContractsIsCrudModel
      */
     public function incrementStat($name, $value = 1)
     {
-        if (!in_array($name, self::$potential_properties)) {
+        if (! in_array($name, self::$potential_properties)) {
             throw new CampaignStatsException('That property does not exist');
         }
 

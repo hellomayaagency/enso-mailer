@@ -74,11 +74,11 @@ class EnsoMailer
     public function getFormDataJson()
     {
         $operands = collect($this->getOperandDefinitions())->map(function ($operand) {
-            return (new $operand)->getJsonData();
+            return (new $operand())->getJsonData();
         })->toArray();
 
         $operators = collect($this->getOperatorDefinitions())->map(function ($operator) {
-            return (new $operator)->getJsonData();
+            return (new $operator())->getJsonData();
         })->toArray();
 
         return collect([
@@ -120,6 +120,7 @@ class EnsoMailer
             return $this->getOperandDefinitions()[$operand_key];
         } catch (Exception $e) {
             Log::error('Operand `' . $operand_key . '` missing or invalid. ' . $e->getMessage());
+
             throw new Exception('Operand `' . $operand_key . '` missing or invalid.');
         }
     }
@@ -136,9 +137,11 @@ class EnsoMailer
     {
         try {
             $class = $this->getOperandClass($operand);
-            return new $class;
+
+            return new $class();
         } catch (Exception $e) {
             Log::error('Operand class for `' . $operand . '` missing or invalid. ' . $e->getMessage());
+
             throw new Exception('Operand class for `' . $operand . '` missing or invalid.');
         }
     }
@@ -176,6 +179,7 @@ class EnsoMailer
             return $this->getOperatorDefinitions()[$operator_key];
         } catch (Exception $e) {
             Log::error('Operator `' . $operator_key . '` missing or invalid. ' . $e->getMessage());
+
             throw new Exception('Operator `' . $operator_key . '` missing or invalid.');
         }
     }
@@ -192,9 +196,11 @@ class EnsoMailer
     {
         try {
             $class = $this->getOperatorClass($operator);
-            return new $class;
+
+            return new $class();
         } catch (Exception $e) {
             Log::error('Operator class for `' . $operator . '` missing or invalid. ' . $e->getMessage());
+
             throw new Exception('Operator class for `' . $operator . '` missing or invalid.');
         }
     }
@@ -328,14 +334,14 @@ class EnsoMailer
      *
      * @param array $condition
      *
-     * @return boolean
+     * @return bool
      */
     public function conditionIsValid($condition)
     {
         $type = $condition['type'] ?? null;
         if (
             empty($type) ||
-            !in_array(strtoupper($type), ['AND', 'OR'])
+            ! in_array(strtoupper($type), ['AND', 'OR'])
         ) {
             return false;
         }
@@ -343,15 +349,15 @@ class EnsoMailer
         $component = strtolower($condition['component'] ?? '');
         if (
             empty($component) ||
-            !in_array($component, ['query-group', 'query-condition']) ||
-            !call_user_func([$this, 'validate' . Str::studly($component)], $condition)
+            ! in_array($component, ['query-group', 'query-condition']) ||
+            ! call_user_func([$this, 'validate' . Str::studly($component)], $condition)
         ) {
             return false;
         }
 
         $conditions = $condition['conditions'] ?? [];
         foreach ($conditions as $condition) {
-            if (!$this->conditionIsValid($condition)) {
+            if (! $this->conditionIsValid($condition)) {
                 return false;
             }
         }
@@ -370,7 +376,7 @@ class EnsoMailer
      *
      * @param array $condition.
      *
-     * @return boolean
+     * @return bool
      */
     protected function validateQueryGroup($condition)
     {
@@ -387,28 +393,28 @@ class EnsoMailer
      *
      * @param array $condition
      *
-     * @return boolean
+     * @return bool
      */
     protected function validateQueryCondition($condition)
     {
         $operand = $condition['operand'] ?? '';
         if (
-            !empty($operand) &&
-            !in_array($operand, $this->getOperandNames())
+            ! empty($operand) &&
+            ! in_array($operand, $this->getOperandNames())
         ) {
             return false;
         }
 
         $operator = $condition['operator'] ?? '';
         if (
-            !empty($operator) && (!in_array($operator, $this->getOperatorNames()) ||
-                !$this->getOperandObject($operand)->isValidOperator($operator))
+            ! empty($operator) && (! in_array($operator, $this->getOperatorNames()) ||
+                ! $this->getOperandObject($operand)->isValidOperator($operator))
         ) {
             return false;
         }
 
         $data = $condition['data'] ?? [];
-        if (!is_array($data)) {
+        if (! is_array($data)) {
             return false;
         }
 
@@ -431,7 +437,7 @@ class EnsoMailer
         if ($driver) {
             $sender_class = config('enso.mailer.drivers.' . $driver . '.sender');
 
-            $sender = new $sender_class;
+            $sender = new $sender_class();
         } else {
             $sender = App::make(MailSender::class);
         }
@@ -452,7 +458,7 @@ class EnsoMailer
         if ($driver) {
             $parser_class = config('enso.mailer.drivers.' . $driver . '.parser');
 
-            $parser = new $parser_class;
+            $parser = new $parser_class();
         } else {
             $parser = App::make(MailParser::class);
         }
@@ -473,11 +479,11 @@ class EnsoMailer
     /**
      * Checks whether a Company Logo has been saved for email use
      *
-     * @return boolean
+     * @return bool
      */
     public function hasMailHeaderImage()
     {
-        return !empty($this->getMailHeaderImage());
+        return ! empty($this->getMailHeaderImage());
     }
 
     /**
@@ -513,11 +519,11 @@ class EnsoMailer
     /**
      * Checks whether a Company Logo has been saved for email use
      *
-     * @return boolean
+     * @return bool
      */
     public function hasMailCompanyLogo()
     {
-        return !empty($this->getMailCompanyLogo());
+        return ! empty($this->getMailCompanyLogo());
     }
 
     /**
@@ -554,11 +560,11 @@ class EnsoMailer
     /**
      * Checks whether there is a fallback title.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasMailCompanyTitle()
     {
-        return !empty($this->getMailCompanyTitle());
+        return ! empty($this->getMailCompanyTitle());
     }
 
     /**
@@ -581,7 +587,7 @@ class EnsoMailer
     /**
      * Check to see whether there is a social icons list available to use
      *
-     * @return boolean
+     * @return bool
      */
     public function hasSocialTemplate()
     {
@@ -591,7 +597,7 @@ class EnsoMailer
     /**
      * Check to see whether the top of the footer needs displaying
      *
-     * @return boolean
+     * @return bool
      */
     public function displayFooterTop()
     {
@@ -601,11 +607,11 @@ class EnsoMailer
     /**
      * Checks to see whether there is a copyright year set up
      *
-     * @return boolean
+     * @return bool
      */
     public function hasMailCompanyCopyright()
     {
-        return !empty($this->getMailCompanyCopyright());
+        return ! empty($this->getMailCompanyCopyright());
     }
 
     /**
@@ -642,11 +648,11 @@ class EnsoMailer
     /**
      * Check to see if there is a set company email for the mailer (or an administrator fallback set)
      *
-     * @return boolean
+     * @return bool
      */
     public function hasMailCompanyEmail()
     {
-        return !empty($this->getMailCompanyEmail());
+        return ! empty($this->getMailCompanyEmail());
     }
 
     /**

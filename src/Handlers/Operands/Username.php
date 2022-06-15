@@ -2,8 +2,6 @@
 
 namespace Hellomayaagency\Enso\Mailer\Handlers\Operands;
 
-use Hellomayaagency\Enso\Mailer\Handlers\Operands\BaseOperand;
-
 class Username extends BaseOperand
 {
     /**

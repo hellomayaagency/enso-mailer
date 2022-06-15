@@ -16,9 +16,9 @@ class ConditionTreeNode
     {
         $this->name = $name;
         $this->apply_as = $apply_as;
-        $this->group_conditions = new Collection;
-        $this->standalone_conditions = new Collection;
-        $this->child_nodes = new Collection;
+        $this->group_conditions = new Collection();
+        $this->standalone_conditions = new Collection();
+        $this->child_nodes = new Collection();
     }
 
     public function addCondition($condition, $name = '')
@@ -65,7 +65,7 @@ class ConditionTreeNode
 
     public function hasGroupConditions()
     {
-        return !! $this->getGroupConditions()->count();
+        return ! ! $this->getGroupConditions()->count();
     }
 
     public function getGroupConditions()
@@ -75,7 +75,7 @@ class ConditionTreeNode
 
     public function hasStandaloneConditions()
     {
-        return !! $this->getStandaloneConditions()->count();
+        return ! ! $this->getStandaloneConditions()->count();
     }
 
     public function getStandaloneConditions()
@@ -85,7 +85,7 @@ class ConditionTreeNode
 
     public function hasChildren()
     {
-        return !! $this->getChildren()->count();
+        return ! ! $this->getChildren()->count();
     }
 
     public function getChildren()

@@ -5,7 +5,6 @@ namespace Hellomayaagency\Enso\Mailer\Http\Controllers\Admin;
 use Exception;
 use Hellomayaagency\Enso\Mailer\Contracts\AudienceController as AudienceControllerContract;
 use Hellomayaagency\Enso\Mailer\Contracts\Condition;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -107,12 +106,12 @@ class AudienceController extends Controller implements AudienceControllerContrac
         $condition = call_user_func_array(
             [
                 $this,
-                'apply' . Str::studly($condition->component) . 'Data'
+                'apply' . Str::studly($condition->component) . 'Data',
             ],
             [
                 $condition,
                 $parent_audience,
-                $condition_data
+                $condition_data,
             ]
         );
 
@@ -148,6 +147,7 @@ class AudienceController extends Controller implements AudienceControllerContrac
          */
         if ($conditions->count() === 0) {
             $condition->delete();
+
             return null;
         }
 
@@ -170,8 +170,9 @@ class AudienceController extends Controller implements AudienceControllerContrac
         $condition->operator = $data['operator'] ?? null;
         $condition->data = $data['data'] ?? [];
 
-        if (!$condition->operand || !$condition->operator || count($condition->data) === 0) {
+        if (! $condition->operand || ! $condition->operator || count($condition->data) === 0) {
             $condition->delete();
+
             return null;
         }
 

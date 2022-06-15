@@ -3,15 +3,10 @@
 namespace Hellomayaagency\Enso\Mailer\Http\Controllers\Admin;
 
 use Hellomayaagency\Enso\Mailer\Contracts\Audience;
-use Hellomayaagency\Enso\Mailer\Contracts\AudienceCrud;
 use Hellomayaagency\Enso\Mailer\Contracts\AudienceUserController as AudienceUserControllerContract;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
-use Response;
 use Yadda\Enso\Facades\EnsoCrud;
-use Yadda\Enso\Users\Contracts\UserCrud;
 
 class AudienceUserController implements AudienceUserControllerContract
 {

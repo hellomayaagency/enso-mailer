@@ -113,7 +113,7 @@ abstract class BaseOperand
      *
      * @param string $operator
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidOperator($operator)
     {

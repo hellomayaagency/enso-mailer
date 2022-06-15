@@ -15,7 +15,7 @@ class CTASection extends FlexibleContentSection
      *
      * @param string
      */
-    const DEFAULT_NAME = 'cta';
+    public const DEFAULT_NAME = 'cta';
 
     public function __construct(string $name = 'cta')
     {
@@ -47,7 +47,7 @@ class CTASection extends FlexibleContentSection
         $target = Arr::get($row->blockContent('target'), 'id', null);
 
         return [
-            'link' => !empty($row->blockContent('link')) ? static::sanitizeLink($row->blockContent('link')) : '#',
+            'link' => ! empty($row->blockContent('link')) ? static::sanitizeLink($row->blockContent('link')) : '#',
             'target' => $target ?? '_self',
             'text' => $row->blockContent('text'),
         ];
@@ -63,7 +63,7 @@ class CTASection extends FlexibleContentSection
      */
     protected static function sanitizeLink($link): string
     {
-        if (!preg_match('#^(http(s)?:)?//#', $link)) {
+        if (! preg_match('#^(http(s)?:)?//#', $link)) {
             return '//' . $link;
         }
 

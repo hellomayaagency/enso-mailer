@@ -3,7 +3,6 @@
 namespace Hellomayaagency\Enso\Mailer\Models;
 
 use EnsoMailer;
-use Hellomayaagency\Enso\Mailer\Models\MailRecipient;
 use Illuminate\Database\Eloquent\Model;
 use Yadda\Enso\Crud\Contracts\IsCrudModel as ContractsIsCrudModel;
 use Yadda\Enso\Crud\Traits\IsCrudModel;

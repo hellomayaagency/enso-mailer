@@ -12,8 +12,6 @@ use Hellomayaagency\Enso\Mailer\Contracts\CampaignCrud;
 use Hellomayaagency\Enso\Mailer\Contracts\MailSender;
 use Hellomayaagency\Enso\Mailer\Exceptions\CampaignStateException;
 use Hellomayaagency\Enso\Mailer\Jobs\ScheduleCampaignSend;
-use Hellomayaagency\Enso\Mailer\Models\CampaignStats;
-use Hellomayaagency\Enso\Mailer\Models\MailRecipient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
@@ -25,7 +23,8 @@ use Yadda\Enso\Crud\Traits\IsCrudModel;
 
 class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
 {
-    use HasFlexibleFields, IsCrudModel;
+    use HasFlexibleFields;
+    use IsCrudModel;
 
     protected $table = 'mailer_campaigns';
 
@@ -320,7 +319,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      */
     public function hasMailableTitle()
     {
-        return !empty($this->mail_title);
+        return ! empty($this->mail_title);
     }
 
     /**
@@ -340,7 +339,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      */
     public function hasMailableDate()
     {
-        return !empty($this->mail_date);
+        return ! empty($this->mail_date);
     }
 
     /**
@@ -352,7 +351,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      */
     public function getMailableDate($format = 'jS M Y')
     {
-        if (!$this->hasMailableDate()) {
+        if (! $this->hasMailableDate()) {
             return '';
         }
 
@@ -395,7 +394,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
     public function getRenderedEmail($inline_css = true)
     {
         $raw_html = view($this->getEmailTemplate(), [
-            'mailable' => $this
+            'mailable' => $this,
         ])->render();
 
         if ($inline_css) {
@@ -445,7 +444,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      */
     public function hasBeenSent()
     {
-        return !is_null($this->sent_at);
+        return ! is_null($this->sent_at);
     }
 
     /**
@@ -485,7 +484,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
             return;
         }
 
-        return new $parser_class;
+        return new $parser_class();
     }
 
     /**
@@ -515,7 +514,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      *
      * @param array $email_addresses
      *
-     * @return boolean
+     * @return bool
      */
     public function scheduleSend(Carbon $send_at)
     {
@@ -603,7 +602,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
         })->toArray();
     }
 
-        /**
+    /**
      * Test send this Campaign.
      *
      * This differs from a full send, in that it switches out the Mailer 'Tag'
@@ -612,7 +611,7 @@ class Campaign extends Model implements CampaignContract, ContractsIsCrudModel
      *
      * @param array $email_addresses
      *
-     * @return boolean
+     * @return bool
      */
     public function testSend($email_addresses)
     {

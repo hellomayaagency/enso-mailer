@@ -3,7 +3,6 @@
 namespace Hellomayaagency\Enso\Mailer\Models;
 
 use Hellomayaagency\Enso\Mailer\Contracts\Campaign;
-use Hellomayaagency\Enso\Mailer\Models\MailEvent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Yadda\Enso\Crud\Contracts\IsCrudModel as ContractsIsCrudModel;
@@ -55,7 +54,7 @@ class MailRecipient extends Model implements ContractsIsCrudModel
      * Assigns a recipient to a specified campaign, if not already assigned
      *
      * @param string  $message_id
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return void
      */

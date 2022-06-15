@@ -70,7 +70,7 @@ class MandrillSender implements MailSender
         $message['to'] = $recipients;
 
         $response = $this->mandrill->messages->send([
-            'message' => $message
+            'message' => $message,
         ], true);
 
         try {
@@ -147,7 +147,7 @@ class MandrillSender implements MailSender
     /**
      * Gets the Key of the campaign that this sender has been assigned
      *
-     * @return integer
+     * @return int
      */
     protected function campaignKey()
     {
@@ -179,7 +179,7 @@ class MandrillSender implements MailSender
                 );
             }
 
-            if (!$this->campaignKey()) {
+            if (! $this->campaignKey()) {
                 throw new CampaignSendingException(
                     'The Campaign sender can\'t find the id of the campaign that is should send'
                 );
@@ -190,7 +190,7 @@ class MandrillSender implements MailSender
             collect($response)->each(function ($recipient) {
                 $message_id = data_get($recipient, '_id', null);
 
-                if (!$message_id) {
+                if (! $message_id) {
                     throw new CampaignSendingException(
                         'Campaign Sending response was not an error, but did not contain a a message identifier'
                     );
@@ -200,6 +200,7 @@ class MandrillSender implements MailSender
             });
         } catch (\Exception $e) {
             Log::error($e);
+
             throw $e;
         }
     }

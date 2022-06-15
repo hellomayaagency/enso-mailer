@@ -13,7 +13,7 @@ class TextSection extends FlexibleContentSection
      *
      * @param string
      */
-    const DEFAULT_NAME = 'text';
+    public const DEFAULT_NAME = 'text';
 
     public function __construct(string $name = 'text')
     {

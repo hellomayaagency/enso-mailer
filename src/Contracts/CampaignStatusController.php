@@ -7,7 +7,7 @@ interface CampaignStatusController
     /**
      * Shows the statistics page for the given Campaign
      *
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return View
      */
@@ -16,7 +16,7 @@ interface CampaignStatusController
     /**
      * Sends the given campaign to it's intended recipients
      *
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return Redirect
      */
@@ -25,7 +25,7 @@ interface CampaignStatusController
     /**
      * Gets the current stats for the given campaign from it's sender
      *
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return Redirect
      */

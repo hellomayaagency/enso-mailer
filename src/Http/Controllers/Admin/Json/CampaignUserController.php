@@ -17,8 +17,8 @@ class CampaignUserController implements JsonCampaignUserController
 
         $args = [
             'orderby' => $request->input('orderby', 'order'),
-            'order'   => $request->input('order', 'desc'),
-            'search'  => $request->input('search', null),
+            'order' => $request->input('order', 'desc'),
+            'search' => $request->input('search', null),
         ];
 
         $query = $campaign->generateAudienceQuery();
@@ -37,6 +37,7 @@ class CampaignUserController implements JsonCampaignUserController
         $items = $query->get()->map(function ($user) {
             $user_data = $user->toArray();
             $user_data['name_column'] = $user->name_column;
+
             return $user_data;
         });
 

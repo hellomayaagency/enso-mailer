@@ -49,7 +49,7 @@ interface Audience
      *
      * @param \Illuminate\Database\Query\Builder|null $base_query
      *
-     * @return integer
+     * @return int
      */
     public function getUserCountAttribute($base_query = null);
 

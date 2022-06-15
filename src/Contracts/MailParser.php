@@ -24,7 +24,7 @@ interface MailParser
      *
      * @param mixed $message
      *
-     * @return boolean
+     * @return bool
      */
     public function validateMessage($message);
 
@@ -64,7 +64,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageHasOpens($message);
 
@@ -73,7 +73,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return integer
+     * @return int
      */
     public function getMessageOpenCount($message);
 
@@ -82,7 +82,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageHasClicks($message);
 
@@ -91,7 +91,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return integer
+     * @return int
      */
     public function getMessageClickCount($message);
 
@@ -107,7 +107,7 @@ interface MailParser
     /**
      * Gets the clicks array for this event
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasHardBounced($message);
 
@@ -116,7 +116,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasSoftBounced($message);
 
@@ -125,7 +125,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasMarkedAsSpam($message);
 
@@ -135,7 +135,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageRecipientUnsubscribed($message);
 
@@ -144,7 +144,7 @@ interface MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasRejected($message);
 }

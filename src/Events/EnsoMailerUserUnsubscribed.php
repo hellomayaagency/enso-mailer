@@ -3,15 +3,13 @@
 namespace Hellomayaagency\Enso\Mailer\Events;
 
 use Hellomayaagency\Enso\Mailer\Models\MailEvent;
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class EnsoMailerUserUnsubscribed
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public $mail_event;
 

@@ -61,7 +61,7 @@ class Campaign extends Config
                 'title' => 'Send',
                 'wrapperClass' => 'button is-success',
                 'only_when' => function ($item) {
-                    return !$item->hasBeenSent();
+                    return ! $item->hasBeenSent();
                 },
                 'button' => [
                     'type' => 'fa',
@@ -79,7 +79,7 @@ class Campaign extends Config
                     'content' => 'fa fa-users',
                 ],
                 'only_when' => function ($item) {
-                    return !$item->hasBeenSent();
+                    return ! $item->hasBeenSent();
                 },
                 'order' => 7,
             ],
@@ -111,11 +111,11 @@ class Campaign extends Config
         ]);
 
         $this->getIndexAction('edit')->mergeCondition(function ($item) {
-            return !$item->hasBeenSent();
+            return ! $item->hasBeenSent();
         });
 
         $this->getIndexAction('delete')->mergeCondition(function ($item) {
-            return !$item->hasBeenSent();
+            return ! $item->hasBeenSent();
         });
     }
 
@@ -234,11 +234,11 @@ class Campaign extends Config
         return collect($content)->map(function ($flexible_row_content) use ($rowspec_definitions) {
             $row_type = Arr::get($flexible_row_content, 'type');
 
-            if (!array_key_exists($row_type, $rowspec_definitions)) {
+            if (! array_key_exists($row_type, $rowspec_definitions)) {
                 return null;
             }
 
-            return (new $rowspec_definitions[$row_type])->unpack($flexible_row_content);
+            return (new $rowspec_definitions[$row_type]())->unpack($flexible_row_content);
         })->filter();
     }
 

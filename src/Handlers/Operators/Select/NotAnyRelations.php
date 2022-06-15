@@ -2,7 +2,6 @@
 
 namespace Hellomayaagency\Enso\Mailer\Handlers\Operators\Select;
 
-use Hellomayaagency\Enso\Mailer\Handlers\DataParser;
 use Hellomayaagency\Enso\Mailer\Handlers\Operators\BaseRelationshipSelectOperator;
 
 class NotAnyRelations extends BaseRelationshipSelectOperator
@@ -18,7 +17,7 @@ class NotAnyRelations extends BaseRelationshipSelectOperator
      *
      * @param Collection $data
      *
-     * @return integer
+     * @return int
      */
     protected function getCount($data)
     {

@@ -12,7 +12,7 @@ class DividerSection extends FlexibleContentSection
      *
      * @param string
      */
-    const DEFAULT_NAME = 'divider';
+    public const DEFAULT_NAME = 'divider';
 
     public function __construct(string $name = 'divider')
     {

@@ -3,7 +3,6 @@
 namespace Hellomayaagency\Enso\Mailer\Http\Controllers\Admin\Json;
 
 use Hellomayaagency\Enso\Mailer\Contracts\JsonAudienceUserController;
-use Hellomayaagency\Enso\Mailer\Http\Resources\UserListResource;
 use Hellomayaagency\Enso\Mailer\Http\Resources\UserTableResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;

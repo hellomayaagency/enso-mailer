@@ -39,7 +39,8 @@ class CampaignStatusController implements CampaignStatusControllerContract
             }, explode(',', $request->get('preview_recipients'))),
             function ($email_address) {
                 $validator = Validator::make(['email' => $email_address], ['email' => 'email']);
-                return !$validator->fails();
+
+                return ! $validator->fails();
             }
         );
     }
@@ -90,7 +91,7 @@ class CampaignStatusController implements CampaignStatusControllerContract
      * responses from Mandrill.
      *
      * @param Request $request
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return RedirectResponse
      */
@@ -125,7 +126,7 @@ class CampaignStatusController implements CampaignStatusControllerContract
     /**
      * Gets the current stats for the given campaign from it's sender
      *
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return Redirect
      */
@@ -153,7 +154,7 @@ class CampaignStatusController implements CampaignStatusControllerContract
      * responses from Mandrill.
      *
      * @param Request $request
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return RedirectResponse
      */
@@ -188,7 +189,7 @@ class CampaignStatusController implements CampaignStatusControllerContract
     /**
      * Sends the given campaign to it's intended recipients
      *
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return RedirectResponse
      */
@@ -215,7 +216,7 @@ class CampaignStatusController implements CampaignStatusControllerContract
     /**
      * Shows the statistics page for the given Campaign
      *
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return \Illuminate\View\View
      */

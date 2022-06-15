@@ -2,8 +2,6 @@
 
 namespace Hellomayaagency\Enso\Mailer\Contracts;
 
-use Hellomayaagency\Enso\Mailer\Contracts\Campaign;
-
 interface MailSender
 {
     /**

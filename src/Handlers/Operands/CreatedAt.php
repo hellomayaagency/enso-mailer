@@ -2,8 +2,6 @@
 
 namespace Hellomayaagency\Enso\Mailer\Handlers\Operands;
 
-use Hellomayaagency\Enso\Mailer\Handlers\Operands\BaseOperand;
-
 /**
  * Operand that deals with Selection base on when
  * a queried item was created at.

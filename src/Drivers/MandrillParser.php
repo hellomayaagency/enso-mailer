@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Log;
 
 class MandrillParser implements MailParser
 {
-    const MANDRILL_API_STATES = [
+    public const MANDRILL_API_STATES = [
         'sent',
         'deferred',
         'rejected',
@@ -35,7 +35,7 @@ class MandrillParser implements MailParser
         'manual', // Added for manual calls that only recieve the payload
     ];
 
-    const MANDRILL_API_EVENTS = [
+    public const MANDRILL_API_EVENTS = [
         'send' => EnsoMailerSent::class,
         'deferral' => null,
         'hard_bounce' => EnsoMailerHardBounced::class,
@@ -72,7 +72,7 @@ class MandrillParser implements MailParser
      */
     public function calculateStatsFor($campaign)
     {
-        if (!(is_object($campaign) && $campaign instanceof Campaign)) {
+        if (! (is_object($campaign) && $campaign instanceof Campaign)) {
             $campaign = Campaign::find($campaign);
         }
 
@@ -102,7 +102,7 @@ class MandrillParser implements MailParser
                      */
                     $most_recent = $recipient->messages->first();
 
-                    if (!is_null($most_recent)) {
+                    if (! is_null($most_recent)) {
                         $this->applyMessage($most_recent, $stats);
                     }
 
@@ -128,7 +128,7 @@ class MandrillParser implements MailParser
      *
      * @param mixed $message
      *
-     * @return boolean
+     * @return bool
      */
     public function validateMessage($message)
     {
@@ -146,8 +146,9 @@ class MandrillParser implements MailParser
      */
     protected function applyMessage(MailEvent $message, CampaignStats $stats)
     {
-        if (!$this->hasValidState($this->getMessageState($message))) {
+        if (! $this->hasValidState($this->getMessageState($message))) {
             Log::error('Mandrill Message with invalid state: ' . $message->getKey());
+
             return;
         }
 
@@ -174,7 +175,7 @@ class MandrillParser implements MailParser
      */
     public function createMailEvent($message, $type = null, $timestamp = null)
     {
-        if (!self::validateMessage($message)) {
+        if (! self::validateMessage($message)) {
             return null;
         }
 
@@ -210,7 +211,7 @@ class MandrillParser implements MailParser
     {
         if (
             array_key_exists($message->getType(), self::MANDRILL_API_EVENTS)
-            && !is_null(self::MANDRILL_API_EVENTS[$message->getType()])
+            && ! is_null(self::MANDRILL_API_EVENTS[$message->getType()])
         ) {
             try {
                 $event_class = self::MANDRILL_API_EVENTS[$message->getType()];
@@ -238,7 +239,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageHasOpens($message)
     {
@@ -250,7 +251,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return integer
+     * @return int
      */
     public function getMessageOpenCount($message)
     {
@@ -266,7 +267,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageHasClicks($message)
     {
@@ -278,7 +279,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return integer
+     * @return int
      */
     public function getMessageClickCount($message)
     {
@@ -304,7 +305,7 @@ class MandrillParser implements MailParser
     /**
      * Gets the clicks array for this event
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasHardBounced($message)
     {
@@ -316,7 +317,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasSoftBounced($message)
     {
@@ -328,7 +329,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasMarkedAsSpam($message)
     {
@@ -341,7 +342,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageRecipientUnsubscribed($message)
     {
@@ -353,7 +354,7 @@ class MandrillParser implements MailParser
      *
      * @param MailEvent $message
      *
-     * @return boolean
+     * @return bool
      */
     public function messageWasRejected($message)
     {
@@ -366,7 +367,7 @@ class MandrillParser implements MailParser
      *
      * @param string $state
      *
-     * @return boolean
+     * @return bool
      */
     protected function hasValidState($state)
     {

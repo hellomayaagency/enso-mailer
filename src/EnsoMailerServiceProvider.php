@@ -41,7 +41,6 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use TorMorten\Eventy\Facades\Eventy;
 use Yadda\Enso\Facades\EnsoCrud;
 use Yadda\Enso\Facades\EnsoMenu;
 
@@ -109,7 +108,7 @@ class EnsoMailerServiceProvider extends ServiceProvider
 
             $sender_class = config('enso.mailer.drivers.' . $driver . '.sender');
 
-            return new $sender_class;
+            return new $sender_class();
         });
 
         // Gets the correct Driver for parsing Mail content
@@ -118,7 +117,7 @@ class EnsoMailerServiceProvider extends ServiceProvider
 
             $parser_class = config('enso.mailer.drivers.' . $driver . '.parser');
 
-            return new $parser_class;
+            return new $parser_class();
         });
     }
 
@@ -129,7 +128,7 @@ class EnsoMailerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!$this->app->routesAreCached()) {
+        if (! $this->app->routesAreCached()) {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         }
 
@@ -157,7 +156,7 @@ class EnsoMailerServiceProvider extends ServiceProvider
         Validator::extend('mailer_conditions', function ($attribute, $value, $parameters, $validator) {
             foreach ($value as $condition) {
                 // Test that each condition is valid.
-                if (!EnsoMailer::conditionIsValid($condition)) {
+                if (! EnsoMailer::conditionIsValid($condition)) {
                     return false;
                 }
             }

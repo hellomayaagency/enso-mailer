@@ -2,11 +2,8 @@
 
 namespace Hellomayaagency\Enso\Mailer\Handlers\Operators;
 
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Support\Collection;
 use Hellomayaagency\Enso\Mailer\Handlers\DataParser;
-use Hellomayaagency\Enso\Mailer\Handlers\Operators\BaseOperator;
+use Illuminate\Support\Collection;
 
 abstract class BaseDateOperator extends BaseOperator
 {

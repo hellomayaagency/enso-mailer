@@ -2,7 +2,6 @@
 
 namespace Hellomayaagency\Enso\Mailer\Handlers\Operands;
 
-use Hellomayaagency\Enso\Mailer\Handlers\Operands\BaseOperand;
 use Illuminate\Support\Facades\App;
 use Yadda\Enso\Users\Contracts\Role as RoleContract;
 

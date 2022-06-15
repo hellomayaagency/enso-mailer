@@ -3,7 +3,6 @@
 namespace Hellomayaagency\Enso\Mailer\Handlers\Operators;
 
 use Hellomayaagency\Enso\Mailer\Handlers\DataParser;
-use Hellomayaagency\Enso\Mailer\Handlers\Operators\BaseOperator;
 
 abstract class BaseStringOperator extends BaseOperator
 {

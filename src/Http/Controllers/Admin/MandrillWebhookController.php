@@ -40,7 +40,7 @@ class MandrillWebhookController implements MandrillWebhookControllerContract
      */
     public function store(Request $request)
     {
-        if (!$this->authenticateRequest($request)) {
+        if (! $this->authenticateRequest($request)) {
             Log::error('Mandrill webhook request received with bad credentials');
 
             return Response::make('', 200);
@@ -87,7 +87,7 @@ class MandrillWebhookController implements MandrillWebhookControllerContract
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return boolean
+     * @return bool
      */
     protected function authenticateRequest(Request $request)
     {

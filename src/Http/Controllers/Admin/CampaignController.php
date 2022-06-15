@@ -15,7 +15,7 @@ class CampaignController extends Controller implements CampaignControllerContrac
     /**
      * Additional 'show' route for the CrudController
      *
-     * @param integer $campaign_id
+     * @param int $campaign_id
      *
      * @return View
      */
