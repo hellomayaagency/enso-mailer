@@ -8,20 +8,20 @@
 <tr>
 <td align="center" class="mcnImageContent" valign="top" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;">
 @if(!isset($message))
-@if ($image->getFileinfoProperty('width') < 600)
-<img align="center" title="{{ $image->title }}" alt="{{ $image->alt_text }}" src="{{ $image->getUrl() }}" width="{{ $image->getFileinfoProperty('width') }}" style="max-width:1200px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnRetinaImage">
+@if ($row->image->getFileinfoProperty('width') < 600)
+<img align="center" title="{{ $row->image->title }}" alt="{{ $row->image->alt_text }}" src="{{ $row->image->getUrl() }}" width="{{ $row->image->getFileinfoProperty('width') }}" style="max-width:1200px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnRetinaImage">
 @else
-<img align="center" title="{{ $image->title }}" alt="{{ $image->alt_text }}" src="{{ $image->getResizeUrl('mailer_image', true) }}" width="600" style="max-width:1200px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnRetinaImage">
+<img align="center" title="{{ $row->image->title }}" alt="{{ $row->image->alt_text }}" src="{{ $row->image->getResizeUrl('mailer_image', true) }}" width="600" style="max-width:1200px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnRetinaImage">
 @endif
 @else
-<img align="center" title="{{ $image->title }}" alt="{{ $image->alt_text }}" src="{{ $message->embed($image->getPath()) }}" width="600" style="max-width:1200px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnRetinaImage">
+<img align="center" title="{{ $row->image->title }}" alt="{{ $row->image->alt_text }}" src="{{ $message->embed($row->image->getPath()) }}" width="600" style="max-width:1200px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnRetinaImage">
 @endif
 </td>
 </tr>
-@if(!empty($image->caption))
+@if(!empty($row->image->caption))
 <tr>
 <td align="center">
-<p class="mcnCaption">{{$image->caption}}</p>
+<p class="mcnCaption">{{$row->image->caption}}</p>
 </td>
 </tr>
 @endif
