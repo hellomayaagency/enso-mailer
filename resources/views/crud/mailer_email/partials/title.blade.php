@@ -8,7 +8,7 @@
           <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
           <tr>
           <![endif]-->
-            
+
           <!--[if mso]>
           <td valign="top" width="600" style="width:600px;">
           <![endif]-->
@@ -31,7 +31,7 @@
           <!--[if mso]>
           </td>
           <![endif]-->
-                  
+
           <!--[if mso]>
           </tr>
           </table>
@@ -41,6 +41,6 @@
     </tbody>
   </table>
 
-  @include('enso-crud::modules.mailer.email.partials.divider')
+  @include('enso-crud::mailer_email.partials.divider')
 
 @endif
