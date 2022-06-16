@@ -78,7 +78,7 @@ class AudienceController extends Controller implements AudienceControllerContrac
     protected function createConditionFromData($condition_data, $parent_audience)
     {
         $condition_class = EnsoCrud::modelClass('mailer_condition');
-        $condition = new $condition_class;
+        $condition = new $condition_class();
         $condition->audience()->associate($parent_audience);
 
         $condition->type = $condition_data['type'];

@@ -10,8 +10,6 @@ use Hellomayaagency\Enso\Mailer\Exceptions\CampaignSendingException;
 use Hellomayaagency\Enso\Mailer\Exceptions\CampaignStateException;
 use Hellomayaagency\Enso\Mailer\Models\MailEvent;
 use Hellomayaagency\Enso\Mailer\Models\MailRecipient;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 use Yadda\Enso\Facades\EnsoCrud;
 
 class MandrillSender implements MailSender
