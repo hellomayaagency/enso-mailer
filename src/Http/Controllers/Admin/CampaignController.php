@@ -47,7 +47,9 @@ class CampaignController extends Controller implements CampaignControllerContrac
      */
     protected function cloneItem(Model $item): Model
     {
-        $new_item = $item->replicate(['slug', 'sent_at']);
+        $new_item = $item->replicate(['driver', 'name', 'slug', 'sent_at']);
+
+        $new_item->name = $item->name . ' Copy';
 
         $slug_field = \Yadda\Enso\Crud\Forms\Fields\SlugField::make('slug');
         $section = \Yadda\Enso\Crud\Forms\Section::make('main');
